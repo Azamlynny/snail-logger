@@ -53,7 +53,7 @@ class SnailLogger{
     }
 
     public void printTimeStamp(){
-        out.print(Timer.get() + " ");
+        out.print(Timer.get() + ",");
     }
 
     public void println(String s){
@@ -61,7 +61,7 @@ class SnailLogger{
     }
 
     public void print(String s){
-        out.print(s + " ");
+        out.print(s + ",");
     }
 
     public void write(String s){
