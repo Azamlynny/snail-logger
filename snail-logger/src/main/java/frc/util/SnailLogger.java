@@ -1,31 +1,75 @@
 package frc.util;
 
 import java.io.*;
+import edu.wpi.first.wpilibj.Timer;
 
 class SnailLogger{
     
     String stream;
     PrintWriter out;
+    Timer Timer;
+    int logNumber;
     
     public SnailLogger(String outputStream){
         stream = outputStream;
-        out = new PrintWriter(new BufferedWriter(new FileWriter(stream)));
+        Timer = new Timer();
+
+        getLogNumber();
     }
 
-    void open(){
-
+    public void getLogNumber(){
+        logNumber = 1;
+        String tempString = "";
+        try{
+            BufferedReader in = new BufferedReader(new FileReader("logdata.txt")); //f.readLine()
+            tempString = in.readLine();
+            while(tempString != null){
+                logNumber++;
+                tempString = in.readLine();
+            }
+            in.close();
+        }
+        catch(IOException e){
+            logNumber = -1;
+        }
     }
 
-    void close(){
+    public void open(){
+        try{
+            out = new PrintWriter(new BufferedWriter(new FileWriter(stream + "_" + logNumber)));
+        }
+        catch(IOException e){}
 
+        Timer.reset();
+        Timer.start();
     }
 
-    void writeString(String s){
-
+    public void close(){
+        out.close();
     }
 
-    void writeDouble(double d){
+    public void stopTimer(){
+        Timer.stop();
+    }
 
+    public void printTimeStamp(){
+        out.print(Timer.get() + " ");
+    }
+
+    public void println(String s){
+        out.println(s);
+    }
+
+    public void print(String s){
+        out.print(s + " ");
+    }
+
+    public void write(String s){
+        out.write(s);
+    }
+
+    public void writeDouble(double d){
+        write(Double.toString(d));
     }
     
 }
