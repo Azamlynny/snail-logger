@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import frc.util.*;
+
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -38,8 +40,13 @@ public class Robot extends TimedRobot {
   double turnSpeed;
   boolean enabled = false;
 
+  SnailLogger log;
+
   @Override
   public void robotInit() {
+    log = new SnailLogger("/U/logs/");
+    log.open();
+
     FrontLeft = new WPI_TalonSRX(2);
         BackLeft = new WPI_TalonSRX(3);
         BackRight = new WPI_TalonSRX(4);
@@ -126,8 +133,10 @@ public class Robot extends TimedRobot {
       }
       DriveTrain.arcadeDrive(driveSpeed, turnSpeed);
 
+      log.writeDouble(driveSpeed);
+
       if(Controller.getBButton()){
-        out.close();
+        log.close();
       }
   }
 

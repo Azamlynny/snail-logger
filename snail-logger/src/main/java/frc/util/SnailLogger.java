@@ -3,7 +3,7 @@ package frc.util;
 import java.io.*;
 import edu.wpi.first.wpilibj.Timer;
 
-class SnailLogger{
+public class SnailLogger{
     
     String stream;
     PrintWriter out;
@@ -36,7 +36,7 @@ class SnailLogger{
 
     public void open(){
         try{
-            out = new PrintWriter(new BufferedWriter(new FileWriter(stream + "_" + logNumber + ".csv")));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(stream + logNumber + ".csv")));
         }
         catch(IOException e){}
 
