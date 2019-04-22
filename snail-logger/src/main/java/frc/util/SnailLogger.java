@@ -36,7 +36,7 @@ class SnailLogger{
 
     public void open(){
         try{
-            out = new PrintWriter(new BufferedWriter(new FileWriter(stream + "_" + logNumber)));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(stream + "_" + logNumber + ".csv")));
         }
         catch(IOException e){}
 
